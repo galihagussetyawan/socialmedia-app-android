@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.SocialMediaAppAndroid"
     android:background="?attr/colorOnPrimary"
+    android:theme="@style/Theme.SocialMediaAppAndroid"
     tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -71,10 +71,10 @@
             android:id="@+id/textView2"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
             android:text="Coba sosmed ini secara GRATIS SEKARANG! 🤑"
             android:textColor="?attr/colorPrimaryContainer"
             android:textStyle="bold"
-            android:lineSpacingExtra="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -94,11 +94,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        tools:layout_editor_absoluteX="10dp">
 
         <TextView
             android:id="@+id/textView"
@@ -109,7 +111,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/status_edit_text"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="5dp"
@@ -122,17 +124,27 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/publish_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Publish"
-            android:textColor="?attr/colorPrimaryContainer"
             android:background="@drawable/rounded_background"
             android:backgroundTint="?attr/colorPrimary"
+            android:text="Publish"
             android:textAllCaps="false"
+            android:textColor="?attr/colorPrimaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintTop_toBottomOf="@+id/status_edit_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        tools:itemCount="2"
+        tools:listitem="@layout/feed_card_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
