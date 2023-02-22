@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "776775516596",
+    "project_id": "astro-firebase-1fac6",
+    "storage_bucket": "astro-firebase-1fac6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776775516596:android:ae56894b2ad55a7f4332e1",
+        "android_client_info": {
+          "package_name": "com.example.socialmediaappandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776775516596-5jvigtp4627j47sm51f0v2ouij3vqmuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKXpdqoArFzUGpsoCxWJVITKk868alNmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776775516596-5jvigtp4627j47sm51f0v2ouij3vqmuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

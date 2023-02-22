@@ -99,8 +99,8 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_background"
             android:backgroundTint="?attr/colorOnPrimary"
             android:outlineProvider="none"
@@ -112,8 +112,8 @@
             android:layout_weight="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_background"
             android:backgroundTint="?attr/colorOnPrimary"
             android:outlineProvider="none"
@@ -125,8 +125,8 @@
             android:layout_weight="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_background"
             android:backgroundTint="?attr/colorOnPrimary"
             android:outlineProvider="none"
@@ -138,8 +138,8 @@
             android:layout_weight="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_background"
             android:backgroundTint="?attr/colorOnPrimary"
             android:outlineProvider="none"
@@ -151,8 +151,8 @@
             android:layout_weight="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_background"
             android:backgroundTint="?attr/colorOnPrimary"
             android:outlineProvider="none"
@@ -164,8 +164,8 @@
             android:layout_weight="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_background"
             android:backgroundTint="?attr/colorOnPrimary"
             android:outlineProvider="none"
@@ -177,17 +177,12 @@
             android:layout_weight="1" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_background"
             android:backgroundTint="?attr/colorOnPrimary"
             android:outlineProvider="none"
             android:text="🤗" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -280,7 +275,7 @@
         <androidx.appcompat.widget.AppCompatImageButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:background="none"
+            android:background="@null"
             android:tint="?attr/colorPrimaryVariant"
             android:src="@drawable/ic_baseline_share_24"/>
 
