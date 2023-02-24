@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorOnPrimary"
     android:theme="@style/Theme.SocialMediaAppAndroid"
     tools:context=".ui.home.HomeFragment">
 
@@ -12,7 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorOnPrimary"
+        android:background="?android:windowBackground"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -25,6 +24,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="start"
                 android:background="@drawable/rounded_background"
+                android:backgroundTint="?attr/colorSecondary"
                 android:cropToPadding="true"
                 android:padding="8dp"
                 android:scaleType="fitXY"
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="5dp"
                     android:text="Coba sosmed ini secara GRATIS SEKARANG! 🤑"
-                    android:textColor="?attr/colorPrimaryContainer"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_background"
-                    android:backgroundTint="?attr/colorPrimaryContainer"
+                    android:backgroundTint="?attr/colorOnPrimary"
                     android:text="Daftar"
                     android:textAllCaps="false"
                     android:textColor="?attr/colorPrimary"
@@ -127,7 +127,7 @@
                     android:layout_height="100dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/rounded_background"
-                    android:backgroundTint="?attr/colorSecondaryVariant"
+                    android:backgroundTint="?attr/colorPrimaryContainer"
                     android:gravity="start"
                     android:hint="What are you doing?"
                     android:inputType="text|textMultiLine"
@@ -143,7 +143,7 @@
                     android:backgroundTint="?attr/colorPrimary"
                     android:text="Publish"
                     android:textAllCaps="false"
-                    android:textColor="?attr/colorPrimaryContainer"
+                    android:textColor="?attr/colorOnPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/status_edit_text" />
 
@@ -155,10 +155,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
                 tools:itemCount="2"
-                tools:listitem="@layout/feed_card_item"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                tools:listitem="@layout/feed_card_item" />
 
         </LinearLayout>
 

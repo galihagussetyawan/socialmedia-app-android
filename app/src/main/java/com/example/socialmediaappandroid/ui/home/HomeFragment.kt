@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.socialmediaappandroid.data.network.FeedRepository
+import androidx.fragment.app.activityViewModels
 import com.example.socialmediaappandroid.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
     private lateinit var _binding: FragmentHomeBinding
     private lateinit var _homeAdapter: HomeAdapter
-    private val feedRepository = FeedRepository()
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +30,14 @@ class HomeFragment : Fragment() {
 
     private fun setupAdapter() {
         _homeAdapter = HomeAdapter()
-        feedRepository.getAllFeeds().observe(viewLifecycleOwner) {
+        _binding.rvFeedList.adapter = _homeAdapter
+
+        setDataAdapter()
+    }
+
+    private fun setDataAdapter() {
+        homeViewModel.getFeeds().observe(viewLifecycleOwner) {
             _homeAdapter.setData(it)
         }
-        _binding.rvFeedList.adapter = _homeAdapter
     }
 }

@@ -1,0 +1,6 @@
+package com.example.socialmediaappandroid.model
+
+data class FeedResponse(
+    val feed: Feed? = null,
+    val user: User? = null,
+)

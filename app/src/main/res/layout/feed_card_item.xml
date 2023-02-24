@@ -83,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:text="222 meters" />
 
     </LinearLayout>
@@ -102,7 +102,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_background"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?android:windowBackground"
             android:outlineProvider="none"
             android:text="😎" />
 
@@ -115,7 +115,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_background"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?android:windowBackground"
             android:outlineProvider="none"
             android:text="😬" />
 
@@ -128,7 +128,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_background"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?android:windowBackground"
             android:outlineProvider="none"
             android:text="👽" />
 
@@ -141,7 +141,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_background"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?android:windowBackground"
             android:outlineProvider="none"
             android:text="😺" />
 
@@ -154,7 +154,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_background"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?android:windowBackground"
             android:outlineProvider="none"
             android:text="😘" />
 
@@ -167,7 +167,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_background"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?android:windowBackground"
             android:outlineProvider="none"
             android:text="🤡" />
 
@@ -180,7 +180,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_background"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?android:windowBackground"
             android:outlineProvider="none"
             android:text="🤗" />
 
@@ -211,7 +211,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:textColor="?attr/colorPrimaryVariant"
-                android:text="0"/>
+                android:text="0" />
 
         </LinearLayout>
 
@@ -237,7 +237,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:textColor="?attr/colorPrimaryVariant"
-                android:text="0"/>
+                android:text="0" />
 
         </LinearLayout>
 
@@ -263,7 +263,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:textColor="?attr/colorPrimaryVariant"
-                android:text="0"/>
+                android:text="0" />
 
         </LinearLayout>
 
@@ -277,7 +277,7 @@
             android:layout_height="40dp"
             android:background="@null"
             android:tint="?attr/colorPrimaryVariant"
-            android:src="@drawable/ic_baseline_share_24"/>
+            android:src="@drawable/ic_baseline_share_24" />
 
 
     </LinearLayout>
