@@ -1,17 +1,31 @@
 package com.example.socialmediaappandroid.ui.home
 
+import android.annotation.SuppressLint
+import android.location.Location
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import com.example.socialmediaappandroid.databinding.FragmentHomeBinding
+import com.example.socialmediaappandroid.utils.PermissionUtils
+import com.google.android.gms.location.*
 
 class HomeFragment : Fragment() {
     private lateinit var _binding: FragmentHomeBinding
     private lateinit var _homeAdapter: HomeAdapter
     private val homeViewModel: HomeViewModel by activityViewModels()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val locationData = MutableLiveData<Location>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +39,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getLocationListener()
         setupAdapter()
     }
 
@@ -36,8 +51,52 @@ class HomeFragment : Fragment() {
     }
 
     private fun setDataAdapter() {
-        homeViewModel.getFeeds().observe(viewLifecycleOwner) {
-            _homeAdapter.setData(it)
+        locationData.observe(viewLifecycleOwner) { loc ->
+            when {
+                loc != null -> {
+                    homeViewModel.getFeeds().observe(viewLifecycleOwner) {
+                        _homeAdapter.setData(it)
+                        _binding.progressBar.visibility = View.GONE
+                        _binding.rvFeedList.visibility = View.VISIBLE
+                    }
+                }
+            }
         }
     }
+
+    private fun getLocationListener() {
+        when {
+            PermissionUtils.isAccessFineLocationGranted(requireActivity()) -> {
+                when {
+                    PermissionUtils.isLocationEnabled(requireActivity()) -> {
+                        getLocation()
+                    }
+                    else -> {
+                        PermissionUtils.showGPSNotEnabledDialog(requireActivity())
+                    }
+                }
+            }
+            else -> {
+                PermissionUtils.requestAccessFineLocationPermission(requireActivity(), 2)
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+
+        fusedLocationClient.requestLocationUpdates(
+            LocationRequest(),
+            object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult) {
+                    super.onLocationResult(locationResult)
+                    for (location in locationResult.locations) {
+                        locationData.postValue(location)
+                    }
+                }
+            },
+            Looper.myLooper()
+        )
+    }
+
 }
