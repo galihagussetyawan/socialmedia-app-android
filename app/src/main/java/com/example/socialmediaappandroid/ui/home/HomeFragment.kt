@@ -65,20 +65,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun getLocationListener() {
-        when {
-            PermissionUtils.isAccessFineLocationGranted(requireActivity()) -> {
-                when {
-                    PermissionUtils.isLocationEnabled(requireActivity()) -> {
-                        getLocation()
-                    }
-                    else -> {
-                        PermissionUtils.showGPSNotEnabledDialog(requireActivity())
-                    }
-                }
-            }
-            else -> {
-                PermissionUtils.requestAccessFineLocationPermission(requireActivity(), 2)
-            }
+        if (permissionLocation()) {
+            getLocation()
         }
     }
 
@@ -99,4 +87,16 @@ class HomeFragment : Fragment() {
         )
     }
 
+    private fun permissionLocation(): Boolean {
+
+        if (!PermissionUtils.isAccessFineLocationGranted(requireActivity())) {
+            PermissionUtils.requestAccessFineLocationPermission(requireActivity(), 1)
+        }
+
+        if (!PermissionUtils.isLocationEnabled(requireActivity())) {
+            PermissionUtils.showGPSNotEnabledDialog(requireActivity())
+        }
+
+        return true
+    }
 }
