@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
+import com.example.socialmediaappandroid.databinding.BottomSheetPermissionLocationBinding
 import com.example.socialmediaappandroid.databinding.FragmentHomeBinding
 import com.example.socialmediaappandroid.utils.PermissionUtils
 import com.google.android.gms.location.*
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class HomeFragment : Fragment() {
     private lateinit var _binding: FragmentHomeBinding
@@ -39,8 +41,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getLocationListener()
+        setupBottomSheetPermissionLocation()
         setupAdapter()
+        getLocationListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkPermissionLocation()
     }
 
     private fun setupAdapter() {
@@ -54,6 +62,7 @@ class HomeFragment : Fragment() {
         locationData.observe(viewLifecycleOwner) { loc ->
             when {
                 loc != null -> {
+                    _binding.progressBar.visibility = View.VISIBLE
                     homeViewModel.getFeeds().observe(viewLifecycleOwner) {
                         _homeAdapter.setData(it)
                         _binding.progressBar.visibility = View.GONE
@@ -65,7 +74,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getLocationListener() {
-        if (permissionLocation()) {
+        if (checkPermissionLocation()) {
             getLocation()
         }
     }
@@ -87,7 +96,13 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun permissionLocation(): Boolean {
+    private fun checkPermissionLocation(): Boolean {
+        return PermissionUtils.isAccessFineLocationGranted(requireActivity()) && PermissionUtils.isLocationEnabled(
+            requireActivity()
+        )
+    }
+
+    private fun requestPermissionLocation(): Boolean {
 
         if (!PermissionUtils.isAccessFineLocationGranted(requireActivity())) {
             PermissionUtils.requestAccessFineLocationPermission(requireActivity(), 1)
@@ -98,5 +113,20 @@ class HomeFragment : Fragment() {
         }
 
         return true
+    }
+
+    private fun setupBottomSheetPermissionLocation() {
+        val view = BottomSheetPermissionLocationBinding.inflate(layoutInflater)
+        val dialog = BottomSheetDialog(requireActivity())
+        dialog.setContentView(view.root)
+
+        if (checkPermissionLocation()) {
+            dialog.dismiss()
+        } else {
+            dialog.show()
+            view.btnAcceptPermissionLocation.setOnClickListener {
+                requestPermissionLocation()
+            }
+        }
     }
 }
