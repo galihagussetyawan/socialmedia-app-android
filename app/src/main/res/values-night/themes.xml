@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.SocialMediaAppAndroid" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.SocialMediaAppAndroid" parent="Theme.Material3.Dark.NoActionBar">
         <item name="android:windowBackground">@color/gray_900</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green</item>

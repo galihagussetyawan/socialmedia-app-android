@@ -44,11 +44,18 @@ class HomeFragment : Fragment() {
         setupBottomSheetPermissionLocation()
         setupAdapter()
         getLocationListener()
+        setupSearchView()
     }
 
     override fun onResume() {
         super.onResume()
-        checkPermissionLocation()
+        getLocationListener()
+    }
+
+    private fun setupSearchView() {
+        _binding.appBarLayout.btnSearch.setOnClickListener {
+            _binding.searchView.show()
+        }
     }
 
     private fun setupAdapter() {
@@ -63,11 +70,12 @@ class HomeFragment : Fragment() {
             when {
                 loc != null -> {
                     _binding.progressBar.visibility = View.VISIBLE
-                    homeViewModel.getFeeds().observe(viewLifecycleOwner) {
-                        _homeAdapter.setData(it)
-                        _binding.progressBar.visibility = View.GONE
-                        _binding.rvFeedList.visibility = View.VISIBLE
-                    }
+                    homeViewModel.getFeeds(loc.latitude, loc.longitude)
+                        .observe(viewLifecycleOwner) {
+                            _homeAdapter.setData(it)
+                            _binding.progressBar.visibility = View.GONE
+                            _binding.rvFeedList.visibility = View.VISIBLE
+                        }
                 }
             }
         }
@@ -126,6 +134,7 @@ class HomeFragment : Fragment() {
             dialog.show()
             view.btnAcceptPermissionLocation.setOnClickListener {
                 requestPermissionLocation()
+                dialog.dismiss()
             }
         }
     }

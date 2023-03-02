@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:elevation="10dp"
+    android:background="?android:windowBackground">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_search"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="?attr/colorSecondary"
+        android:cropToPadding="true"
+        android:layout_gravity="start"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_baseline_search_24"
+        android:tint="?attr/colorOnPrimary" />
+
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_background"
+        android:paddingHorizontal="20dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/app_name"
+        android:textColor="?attr/colorOnPrimary"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_menu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_background"
+        android:padding="8dp"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_baseline_menu_24"
+        android:tint="?attr/colorOnPrimary" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
