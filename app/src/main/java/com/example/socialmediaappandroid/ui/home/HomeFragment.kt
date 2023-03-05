@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        _homeAdapter = HomeAdapter()
+        _homeAdapter = HomeAdapter(requireActivity())
         _binding.rvFeedList.adapter = _homeAdapter
 
         setDataAdapter()
