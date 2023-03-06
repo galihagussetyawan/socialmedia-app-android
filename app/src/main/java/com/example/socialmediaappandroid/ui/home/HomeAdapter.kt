@@ -58,15 +58,86 @@ class HomeAdapter(private val context: Context) :
 
     private fun setupImageCollection(holder: ViewHolder, position: Int) {
         with(holder) {
-            if (data?.get(position)?.images?.size!! > 0) {
-                binding.cardSingleImage
+
+            if (data!![position].images!!.isEmpty()) {
+                binding.flImageCollection.visibility = View.GONE
+            }
+
+            if (data!![position].images!!.size == 1) {
+                binding.cardSingleImage.root.visibility = View.VISIBLE
 
                 Glide.with(context)
-                    .load(data?.get(position)?.images?.get(0)?.url)
+                    .load(data!![position].images?.get(0)?.url)
                     .into(binding.cardSingleImage.ivFirstImage)
+            }
 
-            } else {
-                binding.flImageCollection.visibility = View.GONE
+            if (data!![position].images!!.size == 2) {
+                binding.cardDoubleImage.root.visibility = View.VISIBLE
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(0)?.url)
+                    .into(binding.cardDoubleImage.ivFirstImage)
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(1)?.url)
+                    .into(binding.cardDoubleImage.ivSecondImage)
+            }
+
+
+            if (data!![position].images!!.size == 3) {
+                binding.cardTripleImage.root.visibility = View.VISIBLE
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(0)?.url)
+                    .into(binding.cardTripleImage.ivFirstImage)
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(1)?.url)
+                    .into(binding.cardTripleImage.ivSecondImage)
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(2)?.url)
+                    .into(binding.cardTripleImage.ivThirdImage)
+            }
+
+            if (data!![position].images!!.size == 4) {
+                binding.cardQuadImage.root.visibility = View.VISIBLE
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(0)?.url)
+                    .into(binding.cardQuadImage.ivFirstImage)
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(1)?.url)
+                    .into(binding.cardQuadImage.ivSecondImage)
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(2)?.url)
+                    .into(binding.cardQuadImage.ivThirdImage)
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(3)?.url)
+                    .into(binding.cardQuadImage.ivFourthImage)
+            }
+
+            if (data!![position].images!!.size > 4) {
+                binding.cardMoreImage.root.visibility = View.VISIBLE
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(0)?.url)
+                    .into(binding.cardMoreImage.ivFirstImage)
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(1)?.url)
+                    .into(binding.cardMoreImage.ivSecondImage)
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(2)?.url)
+                    .into(binding.cardMoreImage.ivThirdImage)
+
+                Glide.with(context)
+                    .load(data!![position].images?.get(3)?.url)
+                    .into(binding.cardMoreImage.ivMoreImage)
             }
         }
     }

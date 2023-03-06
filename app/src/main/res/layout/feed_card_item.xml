@@ -55,26 +55,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatar_image" />
 
-    <!--    <androidx.appcompat.widget.AppCompatImageView-->
-    <!--        android:id="@+id/iv_single"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        app:layout_constraintDimensionRatio="16:9"-->
-    <!--        android:background="@drawable/rounded_background"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/text_body"-->
-    <!--        tools:layout_editor_absoluteX="10dp" />-->
-
     <FrameLayout
         android:id="@+id/fl_image_collection"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/text_body"
         tools:layout_editor_absoluteX="10dp"
         android:orientation="vertical">
 
         <include
-            layout="@layout/feed_collection_image_single"
-            android:id="@+id/card_single_image" />
+            layout="@layout/feed_collection_single_image"
+            android:id="@+id/card_single_image"
+            android:visibility="gone" />
+
+        <include
+            layout="@layout/feed_collection_double_image"
+            android:id="@+id/card_double_image"
+            android:visibility="gone" />
+
+        <include
+            layout="@layout/feed_collection_triple_image"
+            android:id="@+id/card_triple_image"
+            android:visibility="gone" />
+
+        <include
+            layout="@layout/feed_collection_quad_image"
+            android:id="@+id/card_quad_image"
+            android:visibility="gone" />
+
+        <include
+            layout="@layout/feed_collection_more_image"
+            android:id="@+id/card_more_image"
+            android:visibility="gone" />
 
     </FrameLayout>
 
