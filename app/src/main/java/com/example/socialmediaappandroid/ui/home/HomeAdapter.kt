@@ -4,8 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.socialmediaappandroid.R
 import com.example.socialmediaappandroid.databinding.FeedCardItemBinding
 import com.example.socialmediaappandroid.model.FeedResponse
 
@@ -34,6 +36,7 @@ class HomeAdapter(private val context: Context) :
 
         setupAvatarImage(holder, position)
         setupImageCollection(holder, position)
+        setupEmoReact(holder)
     }
 
     override fun getItemCount(): Int {
@@ -138,6 +141,14 @@ class HomeAdapter(private val context: Context) :
                 Glide.with(context)
                     .load(data!![position].images?.get(3)?.url)
                     .into(binding.cardMoreImage.ivMoreImage)
+            }
+        }
+    }
+
+    fun setupEmoReact(holder: ViewHolder) {
+        with(holder) {
+            binding.btnEmo1.setOnClickListener {
+                Navigation.findNavController(it).navigate(R.id.loginFragment)
             }
         }
     }

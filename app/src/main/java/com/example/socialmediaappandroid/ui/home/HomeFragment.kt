@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
+import com.example.socialmediaappandroid.R
 import com.example.socialmediaappandroid.databinding.BottomSheetPermissionLocationBinding
 import com.example.socialmediaappandroid.databinding.FragmentHomeBinding
 import com.example.socialmediaappandroid.utils.PermissionUtils
@@ -45,11 +47,18 @@ class HomeFragment : Fragment() {
         setupAdapter()
         getLocationListener()
         setupSearchView()
+        setupView()
     }
 
     override fun onResume() {
         super.onResume()
         getLocationListener()
+    }
+
+    private fun setupView() {
+        _binding.btnLogin.setOnClickListener {
+            findNavController().navigate(R.id.loginFragment)
+        }
     }
 
     private fun setupSearchView() {
