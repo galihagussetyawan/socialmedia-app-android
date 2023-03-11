@@ -1,7 +1,6 @@
 package com.example.socialmediaappandroid.ui.login
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,16 +10,15 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.socialmediaappandroid.R
 import com.example.socialmediaappandroid.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginFragment : Fragment() {
-    private val REQ_CODE: Int = 123
     private lateinit var _binding: FragmentLoginBinding
     private lateinit var authViewModel: AuthViewModel
 
@@ -53,19 +51,29 @@ class LoginFragment : Fragment() {
 
         initSignButton()
         initLogoutButton()
+
+        if (authViewModel.getCurrentUser() != null) {
+            Log.d("LOGIN-FRAGMENT", authViewModel.getCurrentUser()?.uid.toString())
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (GoogleSignIn.getLastSignedInAccount(requireActivity()) != null) {
+            findNavController().navigate(R.id.homeFragment)
+        }
     }
 
     private fun initSignButton() {
-
         _binding.btnSigninGoogle.setOnClickListener {
-            val signIntent: Intent = authViewModel.googleSignInClient.signInIntent
-            launcher.launch(signIntent)
+            launcher.launch(authViewModel.getIntentSignWithGoogle())
         }
     }
 
     private fun initLogoutButton() {
         _binding.btnLogout.setOnClickListener {
-            authViewModel.googleSignInClient.signOut()
+            authViewModel.signOut()
         }
     }
 
@@ -78,7 +86,7 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     handleResult(task)
                 } else {
-                    Toast.makeText(requireActivity(), "FAILDed", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireActivity(), "Failed", Toast.LENGTH_SHORT)
                 }
             }
         }
@@ -87,18 +95,17 @@ class LoginFragment : Fragment() {
         try {
             val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
             if (account != null) {
-                UpdateUI(account)
+                updateUi(account)
             }
         } catch (e: ApiException) {
             Toast.makeText(requireActivity(), e.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun UpdateUI(account: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-        authViewModel.auth.signInWithCredential(credential).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d("LOGIN-FRAGMENT", task.result.user?.displayName.toString())
+    private fun updateUi(account: GoogleSignInAccount) {
+        authViewModel.signWithCredential(account).addOnCompleteListener {
+            if (it.isSuccessful) {
+                findNavController().navigate(R.id.homeFragment)
             }
         }
     }
