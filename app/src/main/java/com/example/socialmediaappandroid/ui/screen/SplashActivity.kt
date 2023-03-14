@@ -1,11 +1,10 @@
-package com.example.socialmediaappandroid.ui.splash
+package com.example.socialmediaappandroid.ui.screen
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.example.socialmediaappandroid.MainActivity
 import com.example.socialmediaappandroid.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {

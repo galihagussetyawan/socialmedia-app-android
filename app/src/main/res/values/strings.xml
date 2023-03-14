@@ -2,4 +2,7 @@
     <string name="app_name">For Your Update</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="banner_message_not_authenticated">Coba sosmed ini secara GRATIS SEKARANG! 🤑</string>
+    <string name="register">Daftar</string>
+    <string name="logout">Logout</string>
 </resources>

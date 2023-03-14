@@ -1,8 +1,7 @@
-package com.example.socialmediaappandroid.ui.login
+package com.example.socialmediaappandroid.ui.screen
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.socialmediaappandroid.R
 import com.example.socialmediaappandroid.databinding.FragmentLoginBinding
+import com.example.socialmediaappandroid.ui.viewmodel.AuthViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
@@ -25,16 +25,7 @@ class LoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModelFactory =
-            AuthViewModelFactory(
-                requireActivity().application,
-                getString(R.string.default_web_client_id)
-            )
-
-        authViewModel = ViewModelProvider(
-            this,
-            viewModelFactory
-        )[AuthViewModel::class.java]
+        authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -50,30 +41,11 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initSignButton()
-        initLogoutButton()
-
-        if (authViewModel.getCurrentUser() != null) {
-            Log.d("LOGIN-FRAGMENT", authViewModel.getCurrentUser()?.uid.toString())
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        if (GoogleSignIn.getLastSignedInAccount(requireActivity()) != null) {
-            findNavController().navigate(R.id.homeFragment)
-        }
     }
 
     private fun initSignButton() {
         _binding.btnSigninGoogle.setOnClickListener {
             launcher.launch(authViewModel.getIntentSignWithGoogle())
-        }
-    }
-
-    private fun initLogoutButton() {
-        _binding.btnLogout.setOnClickListener {
-            authViewModel.signOut()
         }
     }
 

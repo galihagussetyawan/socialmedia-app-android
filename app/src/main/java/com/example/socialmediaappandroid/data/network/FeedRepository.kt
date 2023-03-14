@@ -15,4 +15,11 @@ class FeedRepository {
 
         return feedRef
     }
+
+    fun checkIsReaction(feedId: String, userId: String): Query {
+        return _db.collection("feeds")
+            .document(feedId)
+            .collection("reactions")
+            .whereEqualTo("userId", userId)
+    }
 }

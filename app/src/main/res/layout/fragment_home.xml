@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.SocialMediaAppAndroid"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.screen.HomeFragment">
 
     <FrameLayout
         android:id="@+id/fl_toolbar"
@@ -54,7 +54,7 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="5dp"
-                    android:text="Coba sosmed ini secara GRATIS SEKARANG! 🤑"
+                    android:text="@string/banner_message_not_authenticated"
                     android:textColor="?attr/colorOnPrimary"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -135,7 +135,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
-                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
                 tools:itemCount="1"

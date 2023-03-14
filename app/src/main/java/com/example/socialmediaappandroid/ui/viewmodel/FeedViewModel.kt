@@ -1,4 +1,4 @@
-package com.example.socialmediaappandroid.ui.home
+package com.example.socialmediaappandroid.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,20 +6,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.socialmediaappandroid.data.network.FeedRepository
 import com.example.socialmediaappandroid.data.network.ImageRepository
-import com.example.socialmediaappandroid.model.Feed
-import com.example.socialmediaappandroid.model.FeedResponse
-import com.example.socialmediaappandroid.model.Image
-import com.example.socialmediaappandroid.model.User
+import com.example.socialmediaappandroid.model.*
 import com.google.firebase.firestore.GeoPoint
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class HomeViewModel : ViewModel() {
+class FeedViewModel : ViewModel() {
     private val feedRepository = FeedRepository()
     private val feedData: MutableLiveData<List<FeedResponse>> = MutableLiveData()
     private val imageRepository = ImageRepository()
 
-    fun getFeeds(paramLat: Double, paramLon: Double): LiveData<List<FeedResponse>> {
+    fun getFeeds(paramLat: Double, paramLon: Double, userId: String): LiveData<List<FeedResponse>> {
 
         viewModelScope.launch {
             val feedResponseList = mutableListOf<FeedResponse>()
@@ -37,21 +34,40 @@ class HomeViewModel : ViewModel() {
             val lesserGeo = GeoPoint(lowerLat, lowerLon)
             val greaterGeo = GeoPoint(greaterLat, greaterLon)
 
-            val users =
+            val feeds =
                 feedRepository.getAllFeeds(lesserGeo, greaterGeo).get().await()
                     .toObjects(Feed::class.java)
 
-            users.forEach {
+            feeds.forEach {
                 val user = it.userId?.get()?.await()?.toObject(User::class.java)
                 val images = imageRepository.getFeedImages(it.id.toString()).get().await()
                     .toObjects(Image::class.java)
 
-                feedResponseList.add(FeedResponse(it, user, images))
+                feedResponseList.add(
+                    FeedResponse(
+                        it,
+                        user,
+                        images,
+                        checkIsReaction(it.id.toString(), userId)
+                    )
+                )
             }
 
             feedData.postValue(feedResponseList)
         }
 
         return feedData
+    }
+
+    private suspend fun checkIsReaction(feedId: String, userId: String): Reaction? {
+        val reaction =
+            feedRepository.checkIsReaction(feedId, userId)
+                .get().await().toObjects(Reaction::class.java)
+
+        if (reaction.size == 0) {
+            return null
+        }
+
+        return reaction[0]
     }
 }
