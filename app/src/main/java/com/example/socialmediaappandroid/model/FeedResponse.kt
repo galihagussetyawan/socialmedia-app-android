@@ -1,8 +1,8 @@
 package com.example.socialmediaappandroid.model
 
 data class FeedResponse(
-    val feed: Feed? = null,
-    val user: User? = null,
-    val images: List<Image>? = null,
-    val reaction: Reaction? = null,
+    var feed: Feed? = null,
+    var user: User? = null,
+    var images: List<Image>? = null,
+    var reaction: Reaction? = null,
 )

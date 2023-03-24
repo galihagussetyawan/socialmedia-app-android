@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        _homeAdapter = HomeAdapter(requireActivity())
+        _homeAdapter = HomeAdapter(requireActivity(), feedViewModel)
         _binding.rvFeedList.adapter = _homeAdapter
 
         setDataAdapter()

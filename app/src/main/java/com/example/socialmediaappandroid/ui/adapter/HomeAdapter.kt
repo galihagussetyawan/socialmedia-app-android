@@ -9,15 +9,15 @@ import com.bumptech.glide.Glide
 import com.example.socialmediaappandroid.R
 import com.example.socialmediaappandroid.databinding.FeedCardItemBinding
 import com.example.socialmediaappandroid.model.FeedResponse
+import com.example.socialmediaappandroid.ui.viewmodel.FeedViewModel
 
-class HomeAdapter(private val context: Context) :
+class HomeAdapter(private val context: Context, private val feedViewModel: FeedViewModel) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     private var data: List<FeedResponse>? = null
 
     fun setData(d: List<FeedResponse>) {
         data = d
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,7 +27,6 @@ class HomeAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         with(holder) {
             binding.displayName.text = data?.get(position)?.user?.displayName
             binding.textBody.text = data?.get(position)?.feed?.text
@@ -36,6 +35,7 @@ class HomeAdapter(private val context: Context) :
         setupAvatarImage(holder, position)
         setupImageCollection(holder, position)
         setupEmoReact(holder, position)
+        selectEmoticon(holder, position)
     }
 
     override fun getItemCount(): Int {
@@ -146,8 +146,6 @@ class HomeAdapter(private val context: Context) :
 
     private fun setupEmoReact(holder: ViewHolder, position: Int) {
         with(holder) {
-
-//            set background color is selected
             when (data?.get(position)?.reaction?.symbol) {
                 1 -> {
                     binding.btnEmo1.background.setTint(context.getColor(R.color.green))
@@ -171,18 +169,27 @@ class HomeAdapter(private val context: Context) :
                     binding.btnEmo7.background.setTint(context.getColor(R.color.green))
                 }
             }
+        }
+    }
+
+    private fun selectEmoticon(holder: ViewHolder, position: Int) {
+        with(holder) {
 
             binding.btnEmo1.setOnClickListener {
-                data?.get(position)?.reaction?.symbol = 1
+                feedViewModel.selectEmoticon(position, 1)
+                notifyItemChanged(position)
             }
 
             binding.btnEmo2.setOnClickListener {
-                data?.get(position)?.reaction?.symbol = 2
+                feedViewModel.selectEmoticon(position, 2)
+                notifyItemChanged(position)
             }
 
             binding.btnEmo3.setOnClickListener {
-                data?.get(position)?.reaction?.symbol = 3
+                feedViewModel.selectEmoticon(position, 3)
+                notifyItemChanged(position)
             }
+
         }
     }
 }

@@ -70,4 +70,23 @@ class FeedViewModel : ViewModel() {
 
         return reaction[0]
     }
+
+    fun selectEmoticon(position: Int, symbol: Int) {
+        if (feedData.value?.get(position)?.reaction?.symbol == null) {
+            feedData.postValue(feedData?.value?.toMutableList()?.apply {
+                this?.get(position)?.reaction?.symbol = symbol
+            })
+        } else {
+            if (feedData?.value?.get(position)?.reaction?.symbol != symbol) {
+                feedData.postValue(feedData?.value?.toMutableList()?.apply {
+                    this?.get(position)?.reaction?.symbol = symbol
+                })
+            }
+            if (feedData?.value?.get(position)?.reaction?.symbol == symbol) {
+                feedData.postValue(feedData?.value?.toMutableList()?.apply {
+                    this?.get(position)?.reaction?.symbol = null
+                })
+            }
+        }
+    }
 }
