@@ -15,5 +15,10 @@
         android:name="com.example.socialmediaappandroid.ui.screen.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.example.socialmediaappandroid.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed" />
 
 </navigation>

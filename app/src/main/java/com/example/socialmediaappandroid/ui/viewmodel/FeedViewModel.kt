@@ -71,6 +71,29 @@ class FeedViewModel : ViewModel() {
         return reaction[0]
     }
 
+    fun getFeedById(id: String, currentUserId: String): LiveData<FeedResponse> {
+        val result = MutableLiveData<FeedResponse>()
+
+        viewModelScope.launch {
+            val feed = feedRepository.getFeedById(id).get().await().toObject(Feed::class.java)
+
+            val user = feed?.userId?.get()?.await()?.toObject(User::class.java)
+            val image = imageRepository.getFeedImages(feed?.id.toString()).get().await()
+                .toObjects(Image::class.java)
+
+            result.postValue(
+                FeedResponse(
+                    feed,
+                    user,
+                    image,
+                    checkIsReaction(feed?.id.toString(), currentUserId)
+                )
+            )
+        }
+
+        return result
+    }
+
     fun selectEmoticon(position: Int, symbol: Int) {
         if (feedData.value?.get(position)?.reaction?.symbol == null) {
             feedData.postValue(feedData?.value?.toMutableList()?.apply {
