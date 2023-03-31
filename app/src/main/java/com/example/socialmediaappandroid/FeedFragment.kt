@@ -13,6 +13,7 @@ import com.example.socialmediaappandroid.databinding.FragmentFeedBinding
 import com.example.socialmediaappandroid.model.FeedResponse
 import com.example.socialmediaappandroid.ui.viewmodel.AuthViewModel
 import com.example.socialmediaappandroid.ui.viewmodel.FeedViewModel
+import com.example.socialmediaappandroid.ui.widget.MenuBottomSheetDialogFragment
 
 class FeedFragment : Fragment() {
     private lateinit var _binding: FragmentFeedBinding
@@ -58,6 +59,9 @@ class FeedFragment : Fragment() {
     private fun setupToolbar() {
         _binding.btnBack.setOnClickListener() {
             findNavController().navigateUp()
+        }
+        _binding.btnMenu.setOnClickListener {
+            MenuBottomSheetDialogFragment().show(childFragmentManager, "menu-bottom-sheet")
         }
     }
 
