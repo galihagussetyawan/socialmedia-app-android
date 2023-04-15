@@ -69,6 +69,10 @@ class FeedFragment : Fragment() {
         _binding.feedCardItem.displayName.text = data?.user?.displayName
         _binding.feedCardItem.textBody.text = data?.feed?.text
 
+        _binding.feedCardItem.displayName.setOnClickListener() {
+            findNavController().navigate(R.id.profileFragment)
+        }
+
         setupAvatarImage(data.user?.photoURL.toString())
         setupImageCollection(data)
     }

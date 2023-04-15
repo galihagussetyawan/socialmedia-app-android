@@ -34,9 +34,13 @@ class HomeAdapter(private val context: Context, private val feedViewModel: FeedV
             binding.textBody.text = data?.get(position)?.feed?.text
 
             val bundle = bundleOf("id" to data!!.get(position)!!.feed!!.id)
-            
+
             binding.textBody.setOnClickListener() {
                 Navigation.findNavController(holder.itemView).navigate(R.id.feedFragment, bundle)
+            }
+
+            binding.displayName.setOnClickListener() {
+                Navigation.findNavController(holder.itemView).navigate(R.id.profileFragment)
             }
         }
 

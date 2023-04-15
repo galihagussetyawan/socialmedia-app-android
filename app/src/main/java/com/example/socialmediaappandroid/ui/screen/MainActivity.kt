@@ -1,7 +1,7 @@
 package com.example.socialmediaappandroid.ui.screen
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.socialmediaappandroid.R
 
 class MainActivity : AppCompatActivity() {
