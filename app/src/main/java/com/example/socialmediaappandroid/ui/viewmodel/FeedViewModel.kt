@@ -95,17 +95,16 @@ class FeedViewModel : ViewModel() {
     }
 
     fun selectEmoticon(position: Int, symbol: Int) {
-        if (feedData.value?.get(position)?.reaction?.symbol == null) {
+        if (feedData.value?.get(position)?.reaction == null) {
             feedData.postValue(feedData?.value?.toMutableList()?.apply {
-                this?.get(position)?.reaction?.symbol = symbol
+                this?.get(position)?.reaction = Reaction(null, null, null, symbol, null)
             })
         } else {
             if (feedData?.value?.get(position)?.reaction?.symbol != symbol) {
                 feedData.postValue(feedData?.value?.toMutableList()?.apply {
                     this?.get(position)?.reaction?.symbol = symbol
                 })
-            }
-            if (feedData?.value?.get(position)?.reaction?.symbol == symbol) {
+            } else {
                 feedData.postValue(feedData?.value?.toMutableList()?.apply {
                     this?.get(position)?.reaction?.symbol = null
                 })

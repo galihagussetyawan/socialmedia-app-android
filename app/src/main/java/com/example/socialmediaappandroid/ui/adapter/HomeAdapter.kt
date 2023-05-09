@@ -1,6 +1,7 @@
 package com.example.socialmediaappandroid.ui.adapter
 
 import android.content.Context
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -185,23 +186,104 @@ class HomeAdapter(private val context: Context, private val feedViewModel: FeedV
     }
 
     private fun selectEmoticon(holder: ViewHolder, position: Int) {
+        val color = TypedValue().let {
+            context.theme.resolveAttribute(android.R.attr.windowBackground, it, true)
+            context.getColor(it.resourceId)
+        }
+
         with(holder) {
 
             binding.btnEmo1.setOnClickListener {
                 feedViewModel.selectEmoticon(position, 1)
-                notifyItemChanged(position)
+
+                binding.btnEmo2.background.setTint(color)
+                binding.btnEmo3.background.setTint(color)
+                binding.btnEmo4.background.setTint(color)
+                binding.btnEmo5.background.setTint(color)
+                binding.btnEmo6.background.setTint(color)
+                binding.btnEmo7.background.setTint(color)
+
+                notifyDataSetChanged()
             }
 
             binding.btnEmo2.setOnClickListener {
                 feedViewModel.selectEmoticon(position, 2)
-                notifyItemChanged(position)
+
+                binding.btnEmo1.background.setTint(color)
+                binding.btnEmo3.background.setTint(color)
+                binding.btnEmo4.background.setTint(color)
+                binding.btnEmo5.background.setTint(color)
+                binding.btnEmo6.background.setTint(color)
+                binding.btnEmo7.background.setTint(color)
+
+                notifyDataSetChanged()
             }
 
             binding.btnEmo3.setOnClickListener {
                 feedViewModel.selectEmoticon(position, 3)
-                notifyItemChanged(position)
+
+                binding.btnEmo2.background.setTint(color)
+                binding.btnEmo1.background.setTint(color)
+                binding.btnEmo4.background.setTint(color)
+                binding.btnEmo5.background.setTint(color)
+                binding.btnEmo6.background.setTint(color)
+                binding.btnEmo7.background.setTint(color)
+
+                notifyDataSetChanged()
             }
 
+            binding.btnEmo4.setOnClickListener {
+                feedViewModel.selectEmoticon(position, 4)
+
+                binding.btnEmo1.background.setTint(color)
+                binding.btnEmo2.background.setTint(color)
+                binding.btnEmo3.background.setTint(color)
+                binding.btnEmo5.background.setTint(color)
+                binding.btnEmo6.background.setTint(color)
+                binding.btnEmo7.background.setTint(color)
+
+                notifyDataSetChanged()
+            }
+
+            binding.btnEmo5.setOnClickListener {
+                feedViewModel.selectEmoticon(position, 5)
+
+                binding.btnEmo1.background.setTint(color)
+                binding.btnEmo2.background.setTint(color)
+                binding.btnEmo3.background.setTint(color)
+                binding.btnEmo4.background.setTint(color)
+                binding.btnEmo6.background.setTint(color)
+                binding.btnEmo7.background.setTint(color)
+
+                notifyDataSetChanged()
+            }
+
+            binding.btnEmo6.setOnClickListener {
+                feedViewModel.selectEmoticon(position, 6)
+
+                binding.btnEmo1.background.setTint(color)
+                binding.btnEmo2.background.setTint(color)
+                binding.btnEmo3.background.setTint(color)
+                binding.btnEmo4.background.setTint(color)
+                binding.btnEmo5.background.setTint(color)
+                binding.btnEmo7.background.setTint(color)
+
+                notifyDataSetChanged()
+            }
+
+            binding.btnEmo7.setOnClickListener {
+                feedViewModel.selectEmoticon(position, 7)
+
+                binding.btnEmo1.background.setTint(color)
+                binding.btnEmo2.background.setTint(color)
+                binding.btnEmo3.background.setTint(color)
+                binding.btnEmo4.background.setTint(color)
+                binding.btnEmo5.background.setTint(color)
+                binding.btnEmo6.background.setTint(color)
+
+                notifyDataSetChanged()
+            }
         }
+
     }
 }
