@@ -158,6 +158,11 @@ class HomeAdapter(private val context: Context, private val feedViewModel: FeedV
     }
 
     private fun setupEmoReact(holder: ViewHolder, position: Int) {
+        val color = TypedValue().let {
+            context.theme.resolveAttribute(android.R.attr.windowBackground, it, true)
+            context.getColor(it.resourceId)
+        }
+
         with(holder) {
             when (data?.get(position)?.reaction?.symbol) {
                 1 -> {
@@ -180,6 +185,15 @@ class HomeAdapter(private val context: Context, private val feedViewModel: FeedV
                 }
                 7 -> {
                     binding.btnEmo7.background.setTint(context.getColor(R.color.green))
+                }
+                else -> {
+                    binding.btnEmo1.background.setTint(color)
+                    binding.btnEmo2.background.setTint(color)
+                    binding.btnEmo3.background.setTint(color)
+                    binding.btnEmo4.background.setTint(color)
+                    binding.btnEmo5.background.setTint(color)
+                    binding.btnEmo6.background.setTint(color)
+                    binding.btnEmo7.background.setTint(color)
                 }
             }
         }

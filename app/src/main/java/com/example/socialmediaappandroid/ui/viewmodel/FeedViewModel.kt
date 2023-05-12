@@ -1,5 +1,6 @@
 package com.example.socialmediaappandroid.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -110,5 +111,7 @@ class FeedViewModel : ViewModel() {
                 })
             }
         }
+
+        Log.d("feed-viewmodel", feedData?.value?.get(position)?.reaction.toString())
     }
 }
