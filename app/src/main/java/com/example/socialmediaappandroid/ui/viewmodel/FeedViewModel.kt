@@ -1,6 +1,5 @@
 package com.example.socialmediaappandroid.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -72,26 +71,10 @@ class FeedViewModel : ViewModel() {
         return reaction[0]
     }
 
-    fun getFeedById(id: String, currentUserId: String): LiveData<FeedResponse> {
+    fun getFeedById(position: Int): LiveData<FeedResponse> {
         val result = MutableLiveData<FeedResponse>()
-
-        viewModelScope.launch {
-            val feed = feedRepository.getFeedById(id).get().await().toObject(Feed::class.java)
-
-            val user = feed?.userId?.get()?.await()?.toObject(User::class.java)
-            val image = imageRepository.getFeedImages(feed?.id.toString()).get().await()
-                .toObjects(Image::class.java)
-
-            result.postValue(
-                FeedResponse(
-                    feed,
-                    user,
-                    image,
-                    checkIsReaction(feed?.id.toString(), currentUserId)
-                )
-            )
-        }
-
+        result.postValue(feedData.value?.get(position))
+        
         return result
     }
 
@@ -111,7 +94,5 @@ class FeedViewModel : ViewModel() {
                 })
             }
         }
-
-        Log.d("feed-viewmodel", feedData?.value?.get(position)?.reaction.toString())
     }
 }
