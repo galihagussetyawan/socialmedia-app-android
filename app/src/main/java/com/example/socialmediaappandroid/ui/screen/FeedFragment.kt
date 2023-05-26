@@ -12,12 +12,16 @@ import com.bumptech.glide.Glide
 import com.example.socialmediaappandroid.R
 import com.example.socialmediaappandroid.databinding.FragmentFeedBinding
 import com.example.socialmediaappandroid.model.FeedResponse
+import com.example.socialmediaappandroid.ui.adapter.CommentAdapter
+import com.example.socialmediaappandroid.ui.viewmodel.CommentViewModel
 import com.example.socialmediaappandroid.ui.viewmodel.FeedViewModel
 import com.example.socialmediaappandroid.ui.widget.MenuBottomSheetDialogFragment
 
 class FeedFragment : Fragment() {
     private lateinit var _binding: FragmentFeedBinding
     private val _feedViewModel: FeedViewModel by activityViewModels()
+    private val _commentViewModel: CommentViewModel by activityViewModels()
+    private lateinit var _commentAdapter: CommentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +47,20 @@ class FeedFragment : Fragment() {
             setupFeedCard(it)
             setupEmoReact(it)
             selectEmoticon(position)
+
+            setupCommentAdapter()
+            _commentViewModel.getComments(it.feed?.id!!)
+                .observe(viewLifecycleOwner) { commentItem ->
+                    _commentAdapter.initData(commentItem)
+                }
         }
 
         setupToolbar()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _commentViewModel.clearComments()
     }
 
     private fun setupToolbar() {
@@ -285,5 +300,10 @@ class FeedFragment : Fragment() {
         _feedViewModel.getFeedById(position).observe(viewLifecycleOwner) {
             setupEmoReact(it)
         }
+    }
+
+    private fun setupCommentAdapter() {
+        _commentAdapter = CommentAdapter(requireActivity())
+        _binding.rvCommentList.adapter = _commentAdapter
     }
 }
