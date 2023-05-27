@@ -7,10 +7,10 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_profile_picture"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/rounded_background"
-        android:backgroundTint="@color/green"
+        android:clipToOutline="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,11 +18,9 @@
         android:id="@+id/tv_display_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:text="Display Name"
         android:textStyle="bold"
-        android:textSize="12dp"
-        android:textAllCaps="true"
         app:layout_constraintStart_toEndOf="@+id/iv_profile_picture"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,8 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:text="'@username'"
-        android:textSize="10dp"
+        android:text="username"
         android:textColor="?attr/colorPrimaryVariant"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/tv_display_name"
@@ -63,8 +60,7 @@
             android:layout_height="wrap_content"
             android:textColor="?attr/colorPrimaryVariant"
             android:textStyle="italic"
-            android:text="balas"
-            android:textSize="10dp" />
+            android:text="balas" />
 
         <Space
             android:layout_width="3dp"
@@ -75,9 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="italic"
-            android:textSize="10dp"
             android:textColor="?attr/colorPrimary"
-            android:text="'@username'" />
+            android:text="username" />
 
     </LinearLayout>
 
@@ -85,8 +80,9 @@
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingVertical="5dp"
+        android:paddingVertical="10dp"
         android:text="Example reply comment"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tv_display_name"
         app:layout_constraintTop_toBottomOf="@+id/iv_profile_picture" />
 
@@ -104,8 +100,7 @@
             android:drawableTint="?attr/colorPrimaryVariant"
             android:gravity="center"
             android:textColor="?attr/colorPrimaryVariant"
-            android:text="balas"
-            android:textSize="10dp" />
+            android:text="balas" />
 
         <Space
             android:layout_width="20dp"
@@ -115,8 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="?attr/colorPrimaryVariant"
-            android:text="lihat balasan"
-            android:textSize="10dp" />
+            android:text="lihat balasan" />
 
     </LinearLayout>
 
