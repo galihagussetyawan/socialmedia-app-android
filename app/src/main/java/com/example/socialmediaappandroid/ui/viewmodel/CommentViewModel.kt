@@ -1,6 +1,5 @@
 package com.example.socialmediaappandroid.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,21 +23,18 @@ class CommentViewModel : ViewModel() {
                 .toObjects(Comment::class.java)
 
             commentList.forEach {
-                val childrenList = mutableListOf<Comment>()
-                val replyRef =
-                    _commentRepository.getCommentByCommentId(it.reply.toString()).get().await()
-                        .toObject(Comment::class.java)
+                val childrenList = mutableListOf<CommentResponse>()
                 val userRef = it.user?.get()?.await()?.toObject(User::class.java)
 
                 it?.children?.forEach { childrenItem ->
-                    childrenList.add(Comment(childrenItem))
+                    childrenList.add(CommentResponse(childrenItem))
                 }
 
                 result.add(
                     CommentResponse(
                         it.id,
                         it.text,
-                        replyRef,
+                        null,
                         childrenList,
                         it.createdAt,
                         it.updatedAt,
@@ -49,7 +45,6 @@ class CommentViewModel : ViewModel() {
                 _comments.postValue(result)
             }
         }
-        Log.d("comment-viewmodel", _comments.value?.size.toString())
         return _comments
     }
 

@@ -2,6 +2,7 @@ package com.example.socialmediaappandroid.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -29,16 +30,25 @@ class CommentAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        setupCommentCard(holder, position)
+    }
+
+    override fun getItemCount(): Int {
+        return data?.size ?: 0
+    }
+
+    private fun setupCommentCard(holder: ViewHolder, position: Int) {
         with(holder) {
+            if (data?.get(position)?.reply != null) {
+                binding.lyReply.visibility = View.VISIBLE
+                binding.tvReplyUsername.text = data?.get(position)?.reply?.user?.username
+            }
+
             Glide.with(context).load(data?.get(position)?.user?.photoURL)
                 .into(binding.ivProfilePicture)
             binding.tvDisplayName.text = data?.get(position)?.user?.displayName
             binding.tvUsername.text = "@" + data?.get(position)?.user?.username
             binding.tvContent.text = data?.get(position)?.text
         }
-    }
-
-    override fun getItemCount(): Int {
-        return data?.size ?: 0
     }
 }
