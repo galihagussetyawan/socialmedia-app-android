@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.socialmediaappandroid.R
@@ -43,6 +44,7 @@ class FeedFragment : Fragment() {
         _feedViewModel.getFeedById(position!!).observe(viewLifecycleOwner) {
             _binding.feedCardItem.root.visibility = View.VISIBLE
             _binding.progressBar.visibility = View.GONE
+            _binding.rvCommentList.visibility = View.GONE
 
             setupFeedCard(it)
             setupEmoReact(it)
@@ -51,11 +53,15 @@ class FeedFragment : Fragment() {
             setupCommentAdapter()
             _commentViewModel.getComments(it.feed?.id!!)
                 .observe(viewLifecycleOwner) { commentItem ->
-                    _commentAdapter.initData(commentItem)
+                    if (commentItem.isNotEmpty()) {
+                        _binding.rvCommentList.visibility = View.VISIBLE
+                        _commentAdapter.initData(commentItem)
+                    }
                 }
         }
 
         setupToolbar()
+        setupAddComment()
     }
 
     override fun onDestroy() {
@@ -305,5 +311,33 @@ class FeedFragment : Fragment() {
     private fun setupCommentAdapter() {
         _commentAdapter = CommentAdapter(requireActivity())
         _binding.rvCommentList.adapter = _commentAdapter
+    }
+
+    private fun setupAddComment() {
+        val isShowInput = MutableLiveData(false)
+
+        isShowInput.observe(viewLifecycleOwner) {
+            if (it) {
+                _binding.lyAddComment.visibility = View.VISIBLE
+                _binding.tvShowInputComment.visibility = View.GONE
+
+                _binding.tvShowInputComment.setOnClickListener {
+                    isShowInput.postValue(false)
+                }
+
+                _binding.btnCancel.setOnClickListener {
+                    isShowInput.postValue(false)
+                }
+
+            } else {
+                _binding.lyAddComment.visibility = View.GONE
+                _binding.tvShowInputComment.visibility = View.VISIBLE
+                _binding.tvShowInputComment.text = "+Add Comment"
+
+                _binding.tvShowInputComment.setOnClickListener {
+                    isShowInput.postValue(true)
+                }
+            }
+        }
     }
 }
