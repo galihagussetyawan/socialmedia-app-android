@@ -49,6 +49,15 @@ class CommentAdapter(private val context: Context) :
             binding.tvDisplayName.text = data?.get(position)?.user?.displayName
             binding.tvUsername.text = "@" + data?.get(position)?.user?.username
             binding.tvContent.text = data?.get(position)?.text
+
+            //add reply comment
+            binding.tvReply.setOnClickListener {
+                binding.lyReplyComment.visibility = View.VISIBLE
+            }
+
+            binding.btnDiscard.setOnClickListener {
+                binding.lyReplyComment.visibility = View.GONE
+            }
         }
     }
 }
