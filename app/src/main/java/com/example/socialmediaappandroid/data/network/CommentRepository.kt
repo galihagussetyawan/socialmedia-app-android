@@ -12,7 +12,7 @@ class CommentRepository {
             .whereEqualTo("reply", null)
     }
 
-    fun getCommentByCommentId(commentId: String): DocumentReference {
-        return _db.collection("comments").document(commentId)
+    fun getCommentByCommentId(feedId: String, commentId: String): DocumentReference {
+        return _db.collection("feeds").document(feedId).collection("comments").document(commentId)
     }
 }

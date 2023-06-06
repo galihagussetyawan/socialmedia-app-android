@@ -50,7 +50,7 @@ class FeedFragment : Fragment() {
             setupEmoReact(it)
             selectEmoticon(position)
 
-            setupCommentAdapter()
+            setupCommentAdapter(it?.feed?.id!!)
             _commentViewModel.getComments(it.feed?.id!!)
                 .observe(viewLifecycleOwner) { commentItem ->
                     if (commentItem.isNotEmpty()) {
@@ -308,8 +308,12 @@ class FeedFragment : Fragment() {
         }
     }
 
-    private fun setupCommentAdapter() {
-        _commentAdapter = CommentAdapter(requireActivity())
+    private fun setupCommentAdapter(feedId: String) {
+        _commentAdapter = CommentAdapter(
+            requireActivity(),
+            _commentViewModel,
+            feedId
+        )
         _binding.rvCommentList.adapter = _commentAdapter
     }
 

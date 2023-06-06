@@ -6,31 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.socialmediaappandroid.databinding.CommentCardItemBinding
+import com.example.socialmediaappandroid.databinding.ReplyCommentCardItemBinding
 import com.example.socialmediaappandroid.model.CommentResponse
-import com.example.socialmediaappandroid.ui.viewmodel.CommentViewModel
 
-class CommentAdapter(
-    private val context: Context,
-    private val commentViewModel: CommentViewModel,
-    private val feedId: String
-) :
-    RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
+class ReplyCommentAdapter(private val context: Context, var data: List<CommentResponse>) :
+    RecyclerView.Adapter<ReplyCommentAdapter.ViewHolder>() {
 
-    private var data: List<CommentResponse>? = null
-
-    fun initData(d: List<CommentResponse>) {
-        data = d
-        notifyDataSetChanged()
-    }
-
-    inner class ViewHolder(val binding: CommentCardItemBinding) :
+    inner class ViewHolder(val binding: ReplyCommentCardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding: CommentCardItemBinding =
-            CommentCardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: ReplyCommentCardItemBinding = ReplyCommentCardItemBinding.inflate(
+            LayoutInflater.from(parent.context)
+        )
         return ViewHolder(binding)
     }
 
@@ -39,7 +28,7 @@ class CommentAdapter(
     }
 
     override fun getItemCount(): Int {
-        return data?.size ?: 0
+        return data.size
     }
 
     private fun setupCommentCard(holder: ViewHolder, position: Int) {
@@ -62,18 +51,6 @@ class CommentAdapter(
 
             binding.btnDiscard.setOnClickListener {
                 binding.lyReplyComment.visibility = View.GONE
-            }
-
-            binding.tvShowReply.setOnClickListener {
-                commentViewModel.getChildrenComments(
-                    feedId,
-                    position,
-                    data?.get(position)?.children!!
-                )
-
-                val replyCommentAdapter =
-                    ReplyCommentAdapter(context, data?.get(position)?.children!!)
-                binding.rvReplyCommentList.adapter = replyCommentAdapter
             }
         }
     }
