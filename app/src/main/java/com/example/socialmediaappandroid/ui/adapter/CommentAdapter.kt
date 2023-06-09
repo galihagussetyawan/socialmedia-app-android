@@ -70,10 +70,18 @@ class CommentAdapter(
                     position,
                     data?.get(position)?.children!!
                 )
+                binding.lyChildrenComment.visibility = View.VISIBLE
+            }
 
-                val replyCommentAdapter =
-                    ReplyCommentAdapter(context, data?.get(position)?.children!!)
-                binding.rvReplyCommentList.adapter = replyCommentAdapter
+            //set children comment adapter
+            if (data?.get(position)?.children!!.isNotEmpty()) {
+                if (data?.get(position)?.children?.get(position)?.text != null) {
+                    val replyCommentAdapter =
+                        ReplyCommentAdapter(context, data?.get(position)?.children!!)
+                    binding.rvReplyCommentList.adapter = replyCommentAdapter
+                }
+            } else {
+                binding.tvShowReply.visibility = View.GONE
             }
         }
     }

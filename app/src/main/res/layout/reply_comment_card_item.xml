@@ -103,17 +103,6 @@
             android:text="balas"
             android:textColor="?attr/colorPrimaryVariant" />
 
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="wrap_content" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_show_reply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="lihat balasan"
-            android:textColor="?attr/colorPrimaryVariant" />
-
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

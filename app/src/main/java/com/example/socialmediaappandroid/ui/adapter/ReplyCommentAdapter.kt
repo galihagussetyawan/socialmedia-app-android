@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.socialmediaappandroid.databinding.ReplyCommentCardItemBinding
 import com.example.socialmediaappandroid.model.CommentResponse
 
-class ReplyCommentAdapter(private val context: Context, var data: List<CommentResponse>) :
+class ReplyCommentAdapter(private val context: Context, private var data: List<CommentResponse>) :
     RecyclerView.Adapter<ReplyCommentAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ReplyCommentCardItemBinding) :
